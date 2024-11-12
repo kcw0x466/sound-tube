@@ -1,5 +1,8 @@
 const express = require('express');
-const { spawn } = require('child_process');
+const spawn = require('child_process');
+const { Client, MusicClient } = require('youtubei');
+const YTVideoIdExtractor = require('youtube-video-id').default;
+const yti = new Client();
 const app = express();
 const PORT = 8000;
 
@@ -54,6 +57,24 @@ app.get('/stream', (req, res) => {
         console.log(`ffmpeg exited with code ${code}`);
     });
 });
+
+app.get('/getInfo', async (req, res) => {
+    const videoId = YTVideoIdExtractor(req.query.url);
+    const info = await yti.getVideo(videoId);
+    if (info == "undefined") {
+        res.status(200).json({
+            err: 1
+        });
+    }
+    else {
+        res.status(200).json({
+            err: 0,
+            id: info.id,
+            title: info.title,
+            length: info.duration
+        });
+    }
+})
 
 // 서버 시작
 app.listen(PORT, () => {
