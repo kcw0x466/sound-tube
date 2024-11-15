@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_music"
+        android:title="노래"
+        android:icon="@drawable/round_audiotrack"
+        />
+    <item
+        android:id="@+id/menu_playlist"
+        android:title="재생목록"
+        android:icon="@drawable/round_playlist_play"
+        />
+    <item
+        android:id="@+id/menu_quick_play"
+        android:title="퀵 플레이"
+        android:icon="@drawable/round_music_video_24"
+        />
+</menu>
