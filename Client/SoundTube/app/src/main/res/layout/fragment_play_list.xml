@@ -5,8 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".PlayList">
 
-    <ListView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Play List"/>
+<!--    <ListView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
 </ScrollView>
