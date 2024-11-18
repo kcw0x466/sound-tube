@@ -1,5 +1,5 @@
 const express = require('express');
-const spawn = require('child_process');
+const {spawn} = require('child_process');
 const { Client, MusicClient } = require('youtubei');
 const YTVideoIdExtractor = require('youtube-video-id').default;
 const yti = new Client();
