@@ -59,21 +59,30 @@ app.get('/stream', (req, res) => {
 });
 
 app.get('/getInfo', async (req, res) => {
-    const videoId = YTVideoIdExtractor(req.query.url);
-    const info = await yti.getVideo(videoId);
-    if (info == "undefined") {
-        res.status(200).json({
-            err: 1
-        });
+    try {
+        const videoId = YTVideoIdExtractor(req.query.url);
+        const info = await yti.getVideo(videoId);
+        if (info == "undefined") {
+            res.status(200).json({
+                err: 1,
+                id: "",
+                title: "",
+                length: 0
+            });
+        }
+        else {
+            res.status(200).json({
+                err: 0,
+                id: info.id,
+                title: info.title,
+                length: info.duration
+            });
+        }
+    } 
+    catch (err) {
+        console.log(err);
     }
-    else {
-        res.status(200).json({
-            err: 0,
-            id: info.id,
-            title: info.title,
-            length: info.duration
-        });
-    }
+    
 })
 
 // 서버 시작

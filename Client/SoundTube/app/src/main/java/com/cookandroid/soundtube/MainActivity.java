@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -19,20 +20,27 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     ImageView play_pause_Btn, nextBtn, prenBtn;
+    TextView musicTitle;
     MusicPlayerState musicPlayerState;
     MediaPlayer mediaPlayer;
+    OkHttpClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // HTTP 톻신 클라이언트 객체 생성
+        client = new OkHttpClient();
 
         // MediaPlayer 인스턴스 생성 및 설정
         mediaPlayer = new MediaPlayer();
@@ -50,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_Navi_Bar);
 
+
         play_pause_Btn = (ImageView) findViewById(R.id.play_pause_btn);
         nextBtn = (ImageView) findViewById(R.id.next_btn);
         prenBtn = (ImageView) findViewById(R.id.prev_btn);
+        musicTitle = (TextView) findViewById(R.id.music_title);
 
         // 처음 화면
         getSupportFragmentManager().beginTransaction().add(R.id.main_frame, new MusicList()).commit();
@@ -84,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
