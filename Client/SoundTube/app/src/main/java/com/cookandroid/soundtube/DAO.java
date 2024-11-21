@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class DAO {
 
     public DAO(Context context) {
         DatabaseHelper dbHelper = new DatabaseHelper(context);
+        dbHelper.copyDatabase();
         database = dbHelper.openDatabase(); // DatabaseHelper에서 기존 데이터베이스를 열기
     }
 
@@ -26,7 +28,7 @@ public class DAO {
 
     // 모든 음악 조회
     public List<MusicInfo> getAllMusics() {
-        List<MusicInfo> userList = new ArrayList<>();
+        List<MusicInfo> musicList = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT * FROM music", null);
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -35,13 +37,18 @@ public class DAO {
                 music.setId(cursor.getString(cursor.getColumnIndexOrThrow("id")));
                 music.setTitle(cursor.getString(cursor.getColumnIndexOrThrow("title")));
                 music.setLength(cursor.getInt(cursor.getColumnIndexOrThrow("length")));
-                userList.add(music);
+                musicList.add(music);
             } while (cursor.moveToNext());
 
             cursor.close();
         }
 
-        return userList;
+        Log.d("DAO", "Music count: " + musicList.size());
+        for (MusicInfo music : musicList) {
+            Log.d("DAO", "Title: " + music.getTitle() + ", Duration: " + music.getLength());
+        }
+
+        return musicList;
     }
 
     // 음악 삭제

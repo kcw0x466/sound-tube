@@ -20,6 +20,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
@@ -32,12 +34,17 @@ public class MainActivity extends AppCompatActivity {
     MusicPlayerState musicPlayerState;
     MediaPlayer mediaPlayer;
     OkHttpClient client;
+    List<MusicInfo> musicList;
+    DAO Dao;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Dao = new DAO(this);
+        musicList = Dao.getAllMusics();
 
         // HTTP 톻신 클라이언트 객체 생성
         client = new OkHttpClient();
