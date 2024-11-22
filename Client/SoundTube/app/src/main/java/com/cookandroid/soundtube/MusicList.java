@@ -44,6 +44,8 @@ public class MusicList extends Fragment {
                     public void onPrepared(MediaPlayer mp) {
                         // 준비 완료 후 오디오 시작
                         mainActivity.mediaPlayer.start();
+                        mainActivity.play_pause_Btn.setImageResource(R.drawable.round_pause);
+                        mainActivity.musicPlayerState.setPlayerState(mainActivity.musicPlayerState.PLAYING);
                     }
                 });
             } catch (Exception e) {

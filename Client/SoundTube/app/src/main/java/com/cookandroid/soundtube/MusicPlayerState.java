@@ -1,27 +1,32 @@
 package com.cookandroid.soundtube;
 
 public class MusicPlayerState {
-    private String tilte;
-    private String url;
+    final int STOPPING = 0;
+    final int PLAYING = 1;
+    final int PAUSING = 2;
+    final int MODE_MUSIC_LIST = 1;
+    final int MODE_QUICK_PLAY = 2;
+    private int currentMode;
+    private int playerState;
 
     public MusicPlayerState() {
-        this.tilte = "";
-        this.url = "";
+        this.currentMode = 0;
+        this.playerState = STOPPING;
     }
 
-    public void setTilte(String tilte) {
-        this.tilte = tilte;
+    public void setPlayerState(int playerState) {
+        this.playerState = playerState;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCurrentMode(int currentMode) {
+        this.currentMode = currentMode;
     }
 
-    public String getTilte() {
-        return tilte;
+    public int getPlayerState() {
+        return playerState;
     }
 
-    public String getUrl() {
-        return url;
+    public int getCurrentMode() {
+        return currentMode;
     }
 }

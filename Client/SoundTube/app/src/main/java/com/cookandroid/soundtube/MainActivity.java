@@ -98,7 +98,16 @@ public class MainActivity extends AppCompatActivity {
         play_pause_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(musicPlayerState.getPlayerState() == musicPlayerState.PLAYING) {
+                    play_pause_Btn.setImageResource(R.drawable.round_play_arrow);
+                    musicPlayerState.setPlayerState(musicPlayerState.PAUSING);
+                    mediaPlayer.pause();
+                }
+                else if(musicPlayerState.getPlayerState() == musicPlayerState.PAUSING) {
+                    play_pause_Btn.setImageResource(R.drawable.round_pause);
+                    musicPlayerState.setPlayerState(musicPlayerState.PLAYING);
+                    mediaPlayer.start();
+                }
             }
         });
 
