@@ -3,7 +3,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,22 +42,17 @@ public class DAO {
             cursor.close();
         }
 
-        Log.d("DAO", "Music count: " + musicList.size());
-        for (MusicInfo music : musicList) {
-            Log.d("DAO", "Title: " + music.getTitle() + ", Duration: " + music.getLength());
-        }
-
         return musicList;
     }
 
     // 음악 삭제
-//    public int deleteUser(int id) {
-//        return database.delete(
-//                "music",
-//                "id = ?",
-//                new String[]{String.valueOf(id)}
-//        );
-//    }
+    public int deleteMusic(MusicInfo music) {
+        return database.delete(
+                "music",
+                "id = ?",
+                new String[]{String.valueOf(music.getId())}
+        );
+    }
 
     // 데이터베이스 닫기
     public void close() {

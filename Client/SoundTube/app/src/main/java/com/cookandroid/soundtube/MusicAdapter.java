@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import java.util.List;
 
 public class MusicAdapter extends BaseAdapter {
@@ -47,11 +48,16 @@ public class MusicAdapter extends BaseAdapter {
 
         int min = music.getLength() / 60;
         int sec = music.getLength() % 60;
-        String duration = min + ":" + sec;
+        String duration = String.format("%d:%02d", min, sec);
 
         titleView.setText(music.getTitle());
         durationView.setText(duration);
 
         return convertView;
+
+    }
+
+    public void refreshData() {
+        notifyDataSetChanged();
     }
 }

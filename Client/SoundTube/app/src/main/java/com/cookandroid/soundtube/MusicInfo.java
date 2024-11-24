@@ -22,9 +22,7 @@ public class MusicInfo {
         return title;
     }
 
-    public void setErr(int err) {
-        this.err = err;
-    }
+    public void setErr(int err) { this.err = err; }
 
     public void setLength(int length) {
         this.length = length;

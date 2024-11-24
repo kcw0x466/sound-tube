@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +36,6 @@ public class QuickPlay extends Fragment {
         inputURL = view.findViewById(R.id.input_yt_link);
         musicLoadBtn = view.findViewById(R.id.music_load_btn);
         mainActivity = (MainActivity) getActivity();
-
-//        if (mainActivity != null) {
-//        }
-
 
         musicLoadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +68,7 @@ public class QuickPlay extends Fragment {
                             else {
                                 mainActivity.musicTitle.setText(musicInfo.getTitle());
                                 try {
-                                    mainActivity.mediaPlayer.reset();
+                                    mainActivity.mediaPlayer.reset(); // 데이터 소스 초기화
                                     mainActivity.mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=" + inputURL.getText().toString());
                                     mainActivity.mediaPlayer.prepareAsync();  // 비동기적으로 준비
                                     mainActivity.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -81,6 +76,7 @@ public class QuickPlay extends Fragment {
                                         public void onPrepared(MediaPlayer mp) {
                                             // 준비 완료 후 오디오 시작
                                             mainActivity.mediaPlayer.start();
+                                            mainActivity.musicPlayerState.setCurrentMode(mainActivity.musicPlayerState.MODE_QUICK_PLAY);
                                         }
                                     });
                                 } catch (Exception e) {

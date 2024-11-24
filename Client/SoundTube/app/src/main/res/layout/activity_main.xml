@@ -17,15 +17,6 @@
         app:title="SoundTube"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:titleTextColor="#FFFFFF">
-
-        <!--        <TextView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:text="Sound Tube"-->
-        <!--            -->
-        <!--            android:textColor="#FFFFFF"-->
-        <!--            android:textSize="34sp" />-->
-
     </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout

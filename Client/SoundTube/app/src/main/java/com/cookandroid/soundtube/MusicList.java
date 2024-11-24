@@ -1,24 +1,18 @@
 package com.cookandroid.soundtube;
 
-import android.media.MediaPlayer;
-import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.List;
-
-
 public class MusicList extends Fragment {
-    private MusicAdapter musicAdapter;
     ListView listView;
     MainActivity mainActivity;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,8 +21,7 @@ public class MusicList extends Fragment {
 
         mainActivity = (MainActivity) getActivity();
 
-        musicAdapter = new MusicAdapter(requireContext(), mainActivity.musicList);
-        listView.setAdapter(musicAdapter);
+        listView.setAdapter(mainActivity.musicAdapter);
 
         listView.setOnItemClickListener((parent, listview, position, id) -> {
             MusicInfo clickedMusic = mainActivity.musicList.get(position);
@@ -46,6 +39,8 @@ public class MusicList extends Fragment {
                         mainActivity.mediaPlayer.start();
                         mainActivity.play_pause_Btn.setImageResource(R.drawable.round_pause);
                         mainActivity.musicPlayerState.setPlayerState(mainActivity.musicPlayerState.PLAYING);
+                        mainActivity.musicPlayerState.setCurrentMode(mainActivity.musicPlayerState.MODE_MUSIC_LIST);
+                        mainActivity.musicPlayerState.setCurrentMusicIndex(mainActivity.musicList.indexOf(clickedMusic));
                     }
                 });
             } catch (Exception e) {
