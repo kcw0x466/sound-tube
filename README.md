@@ -24,4 +24,11 @@
 - 노래 삭제: 저장된 노래들중에서 선택된 노래들을 SQLite DB에서 삭제
 
 ## Showcase
+### 전체 노래 목록 화면 (앱 시작 화면)
+![image](https://github.com/user-attachments/assets/1c15407e-560a-42db-8468-76e1f3e6b0ed)
+
+### 퀵플레이 화면
+![image](https://github.com/user-attachments/assets/463bb2c7-c8b7-4a0d-a95f-367d7da3e295)
+
+
 
