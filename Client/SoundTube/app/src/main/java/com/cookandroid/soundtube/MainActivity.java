@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView musicTitle;
     MusicPlayerState musicPlayerState;
     MusicAdapter musicAdapter;
+    MusicInfo nextMusic;
     MediaPlayer mediaPlayer;
     OkHttpClient client;
     List<MusicInfo> musicList;
@@ -84,10 +85,17 @@ public class MainActivity extends AppCompatActivity {
         // 노래 끝날때 마다 자동으로 다음곡 재생
         mediaPlayer.setOnCompletionListener(mp -> {
             if(musicPlayerState.getCurrentMusicIndex() < musicList.size() && musicPlayerState.getCurrentMode() == musicPlayerState.MODE_MUSIC_LIST) {
-                MusicInfo nextMusic = musicList.get(musicPlayerState.getCurrentMusicIndex() + 1);
-                Toast.makeText(getApplicationContext(), "Title: " + nextMusic.getTitle(), Toast.LENGTH_SHORT).show();
+                try {
+                    nextMusic = musicList.get(musicPlayerState.getCurrentMusicIndex() + 1);
+                    Toast.makeText(getApplicationContext(), "Title: " + nextMusic.getTitle(), Toast.LENGTH_SHORT).show();
+                    musicTitle.setText(nextMusic.getTitle());
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "전체 재생목록 재생 완료", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                musicTitle.setText(nextMusic.getTitle());
                 try {
                     mediaPlayer.reset();
                     mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=https://www.youtube.com/watch?v=" + nextMusic.getId());
