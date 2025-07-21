@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(musicPlayerState.getCurrentMusicIndex() < musicList.size() && musicPlayerState.getCurrentMode() == musicPlayerState.MODE_MUSIC_LIST) {
-                    MusicInfo nextMusic = musicList.get(musicPlayerState.getCurrentMusicIndex() + 1);
+                    MusicInfo nextMusic = musicList.get(musicPlayerState.getCurrentMusicIndex() + 1); // 배열 인덱스 범위 초과 버그 있음
                     Toast.makeText(getApplicationContext(), "Title: " + nextMusic.getTitle(), Toast.LENGTH_SHORT).show();
 
                     musicTitle.setText(nextMusic.getTitle());
