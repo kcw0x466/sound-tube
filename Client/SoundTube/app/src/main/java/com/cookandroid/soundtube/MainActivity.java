@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     List<MusicInfo> musicList;
     DAO Dao;
 
+    String backendAPI_IP;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         musicAdapter = new MusicAdapter(this, musicList); // 리스트 뷰 어댑터
 
         // HTTP 톻신 클라이언트 객체 생성
+        backendAPI_IP = "203.253.176.250:8000";
         client = new OkHttpClient();
 
         // 처음 화면
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     mediaPlayer.reset();
-                    mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=https://www.youtube.com/watch?v=" + nextMusic.getId());
+                    mediaPlayer.setDataSource("http://" + backendAPI_IP + "/stream?url=https://www.youtube.com/watch?v=" + nextMusic.getId());
                     mediaPlayer.prepareAsync();  // 비동기적으로 준비
                     mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     musicTitle.setText(nextMusic.getTitle());
                     try {
                         mediaPlayer.reset();
-                        mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=https://www.youtube.com/watch?v=" + nextMusic.getId());
+                        mediaPlayer.setDataSource("http://" + backendAPI_IP + "/stream?url=https://www.youtube.com/watch?v=" + nextMusic.getId());
                         mediaPlayer.prepareAsync();  // 비동기적으로 준비
                         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -199,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     musicTitle.setText(prevMusic.getTitle());
                     try {
                         mediaPlayer.reset();
-                        mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=https://www.youtube.com/watch?v=" + prevMusic.getId());
+                        mediaPlayer.setDataSource("http://" + backendAPI_IP + "/stream?url=https://www.youtube.com/watch?v=" + prevMusic.getId());
                         mediaPlayer.prepareAsync();  // 비동기적으로 준비
                         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                             @Override
@@ -258,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                     Request request;
                     try {
                         request = new Request.Builder()
-                            .url("http://10.0.2.2:8000/getInfo?url=" + url)
+                            .url("http://" + backendAPI_IP + "/getInfo?url=" + url)
                             .get()
                             .build();
 

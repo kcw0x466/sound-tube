@@ -30,7 +30,7 @@ public class MusicList extends Fragment {
             mainActivity.musicTitle.setText(clickedMusic.getTitle());
             try {
                 mainActivity.mediaPlayer.reset();
-                mainActivity.mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=https://www.youtube.com/watch?v=" + clickedMusic.getId());
+                mainActivity.mediaPlayer.setDataSource("http://" + mainActivity.backendAPI_IP + "/stream?url=https://www.youtube.com/watch?v=" + clickedMusic.getId());
                 mainActivity.mediaPlayer.prepareAsync();  // 비동기적으로 준비
                 mainActivity.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                     @Override

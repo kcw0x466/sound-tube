@@ -42,7 +42,7 @@ public class QuickPlay extends Fragment {
             public void onClick(View view) {
                 try {
                     request = new Request.Builder()
-                            .url("http://10.0.2.2:8000/getInfo?url=" + inputURL.getText().toString())
+                            .url("http://" + mainActivity.backendAPI_IP + "/getInfo?url=" + inputURL.getText().toString())
                             .build();
                 }
                 catch (Exception e) {
@@ -69,7 +69,7 @@ public class QuickPlay extends Fragment {
                                 mainActivity.musicTitle.setText(musicInfo.getTitle());
                                 try {
                                     mainActivity.mediaPlayer.reset(); // 데이터 소스 초기화
-                                    mainActivity.mediaPlayer.setDataSource("http://10.0.2.2:8000/stream?url=" + inputURL.getText().toString());
+                                    mainActivity.mediaPlayer.setDataSource("http://" + mainActivity.backendAPI_IP + "/stream?url=" + inputURL.getText().toString());
                                     mainActivity.mediaPlayer.prepareAsync();  // 비동기적으로 준비
                                     mainActivity.mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                                         @Override
