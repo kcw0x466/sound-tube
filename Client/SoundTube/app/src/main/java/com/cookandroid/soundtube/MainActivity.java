@@ -247,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 노래 추가 다이얼로그
+    // 노래 추가 다이얼로그 (버그: Toast를 UI 스레드에서 처리안해서 앱 강제 종료됨)
     public void musicAddDialog() {
         // URL 입력을 위한 EditText 생성
         EditText urlEditText = new EditText(this);
