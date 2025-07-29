@@ -15,6 +15,8 @@ app.get('/stream', (req, res) => {
         return res.status(400).send('You must provide a YouTube URL');
     }
 
+    console.log("YouTube URL:", youtubeUrl); // Debug
+
     // yt-dlp 명령어로 유튜브 영상에서 오디오만 추출
     const ytDlp = spawn('C:/ffmpeg/bin/yt-dlp.exe', [
         '-f', 'bestaudio', // 가장 좋은 오디오 품질
@@ -31,7 +33,8 @@ app.get('/stream', (req, res) => {
         '-vn', // 비디오 제외
         '-acodec', 'libmp3lame', // MP3로 변환
         '-f', 'mp3', // MP3 포맷
-        'pipe:1' // 표준 출력으로 결과를 스트리밍
+        'pipe:1', // 표준 출력으로 결과를 스트리밍
+        '-nostats'
     ]);
 
     // yt-dlp의 표준 출력을 ffmpeg에 전달
@@ -42,10 +45,10 @@ app.get('/stream', (req, res) => {
 
     // 에러 처리
     ytDlp.stderr.on('data', (data) => {
-        console.error(`yt-dlp error: ${data}`);
+        console.error(`yt-dlp: ${data}`);
     });
     ffmpeg.stderr.on('data', (data) => {
-        console.error(`ffmpeg error: ${data}`);
+        console.error(`ffmpeg: ${data}`);
     });
 
     // 스트리밍 종료 시 처리
@@ -59,6 +62,8 @@ app.get('/stream', (req, res) => {
 });
 
 app.get('/getInfo', async (req, res) => {
+    console.log("Data From Client:", req.query.url); // Debug
+    
     try {
         const videoId = YTVideoIdExtractor(req.query.url);
         const info = await yti.getVideo(videoId);

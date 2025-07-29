@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 다음 곡 재생 버튼
+        // 다음 곡 재생 버튼 (인덱스 순서 버그 있음 -> 내 생각에 노래 로딩이 다되면 인덱스가 설정되서 로딩되기전에 연속으로 클릭해서 그런듯)
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 이전 곡 재생 버튼
+        // 이전 곡 재생 버튼 (인덱스 순서 버그 있음 -> 내 생각에 노래 로딩이 다되면 인덱스가 설정되서 로딩되기전에 연속으로 클릭해서 그런듯)
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

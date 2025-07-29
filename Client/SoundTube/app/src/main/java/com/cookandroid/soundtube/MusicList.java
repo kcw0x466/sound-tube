@@ -23,6 +23,7 @@ public class MusicList extends Fragment {
 
         listView.setAdapter(mainActivity.musicAdapter);
 
+        // 인덱스 버그 있음
         listView.setOnItemClickListener((parent, listview, position, id) -> {
             MusicInfo clickedMusic = mainActivity.musicList.get(position);
             Toast.makeText(requireContext(), "Title: " + clickedMusic.getTitle(), Toast.LENGTH_SHORT).show();
